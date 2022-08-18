@@ -2,16 +2,8 @@ import React, { useState, useEffect } from 'react'
 import withProduct from './withProduct';
 
 // This component will show Products in a Table View
-function AdminProductList() {
-    const [product, setProduct] = useState([]);
-    useEffect(() => {
-        fetch("https://dummyjson.com/products")
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            setProduct(data.products);
-          });
-      }, []);
+function AdminProductList({products}) {
+    
   return (
     <div>
         <table>
@@ -23,9 +15,9 @@ function AdminProductList() {
                 </tr>
             </thead>
             <tbody>
-                {product && product.length > 0 && product.map((p)=>{
+                {products && products.length > 0 && products.map((p)=>{
                     return (
-                        <tr>
+                        <tr key={p.title}>
                             <td>{p.title}</td>
                             <td>{p.description}</td>
                             <td>{p.price}</td>

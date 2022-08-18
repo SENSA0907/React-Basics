@@ -14,6 +14,7 @@ export default class App extends Component {
       count: 0,
       isMale: true,
       productData: {},
+      incrementValue: 5,
       data: [{
         id: 1,
         name: 'senthil'
@@ -148,7 +149,7 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <ProductList />
+        <ProductList incrementValue={this.state.incrementValue} />
         <AdminProductList />
       </React.Fragment>
     )
