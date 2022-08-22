@@ -1,0 +1,15 @@
+.container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.dark-container {
+    background-color: black;
+    color: white;
+}
+.light-container {
+    background-color: white;
+    color: black;
+}
