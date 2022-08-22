@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import UseCallBackDemo from "./UseCallBackDemo";
+import UseDeferedValue from "./UseDeferedValue";
 
-const App = () => {
+/* const App = () => {
   const [number, setNumber] = useState(0);
   const [calcValue, setCalcValue] = useState(0);
   const [isDark, setDark] = useState(false);
@@ -54,6 +55,10 @@ const App = () => {
       </div>
     </div>
   );
-};
+}; */
+
+const App = () => {
+  return <UseDeferedValue></UseDeferedValue>
+}
 
 export default App;
