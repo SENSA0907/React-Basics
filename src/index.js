@@ -5,11 +5,12 @@ import App from './App';
 import CallBackApp from './UseCallback/App';
 import UseReducer from './UseReducer/UseReducer';
 import reportWebVitals from './reportWebVitals';
+import RouterApp from './Router/App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <UseReducer />
+    <App />
   </React.StrictMode>
 );
 

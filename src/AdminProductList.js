@@ -17,10 +17,10 @@ function AdminProductList({products}) {
             <tbody>
                 {products && products.length > 0 && products.map((p)=>{
                     return (
-                        <tr key={p.title}>
-                            <td>{p.title}</td>
-                            <td>{p.description}</td>
-                            <td>{p.price}</td>
+                        <tr key={p.id}>
+                            <td>{p.firstName}</td>
+                            <td>{p.lastName}</td>
+                            <td>{p.age}</td>
                         </tr>
                     )
                 })}
@@ -30,4 +30,4 @@ function AdminProductList({products}) {
   )
 }
 
-export default withProduct(AdminProductList);
+export default withProduct({type: 'users'})(AdminProductList);

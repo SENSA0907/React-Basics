@@ -149,8 +149,8 @@ export default class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <ProductList incrementValue={this.state.incrementValue} />
-        <AdminProductList />
+        <ProductList incrementValue={this.state.incrementValue} type="product" />
+        <AdminProductList type="users" />
       </React.Fragment>
     )
   }

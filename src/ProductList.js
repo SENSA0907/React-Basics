@@ -24,4 +24,4 @@ function ProductList(props) {
 }
 
 
-export default React.memo(withProduct(ProductList));
+export default React.memo(withProduct({type: 'products'})(ProductList));
