@@ -1,0 +1,51 @@
+.header-container {
+    height: 60px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-logo {
+    cursor: pointer;
+    text-align: left;
+    height: 50px;
+    margin-left: 10px;
+}
+
+.header-leftContainer {
+    width: 50%;
+    height: 60px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.header-rightContainer {
+    width: 50%;
+    height: 60px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.header-rightContainer .menuList {
+    list-style: none;
+    margin-block: 0;
+    padding-inline: 0;
+}
+
+.header-rightContainer .navigationButtonLink {
+    border-radius: 10px;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    width: 100px;
+    border: none;
+}

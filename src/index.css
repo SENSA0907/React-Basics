@@ -12,10 +12,30 @@ code {
     monospace;
 }
 
+.backdropContainer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0,0,0,0.8);
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: opacity 3s;
+}
+
 .loginPageContainer {
   margin: auto;
-  width: 40%;
-
+  width: 20%;
+  height: 50%;
+  position: absolute;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  box-shadow: 2px 2px 2px black;
+  border: 1px solid black;
 }
 
 .loginContainer {
