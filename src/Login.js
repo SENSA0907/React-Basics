@@ -1,10 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import Model from "./Model";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
+import LoginContext from "./context/login-context";
 
 export default function Login() {
   const navigate = useNavigate();
+  const loginContext = useContext(LoginContext);
   const [userName, setUserName] = useState("");
   const [pwd, setPwd] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,6 +17,14 @@ export default function Login() {
   useEffect(() => {
     userNameRef.current.focus();
   }, []);
+
+  useEffect(()=>{
+    if (loginContext.isLoggedIn === true) {
+      navigate('/home')
+    }
+  }, [loginContext])
+
+  
 
   const onInputChange = (e, type) => {
     if (e.type === "change" && type === "un") {
@@ -72,7 +82,7 @@ export default function Login() {
         setErrorMessage("Password is Required");
         return;
       }
-      if (enteredUserName.length < 8) {
+      if (userName.length < 8) {
         setIsError(true);
         setErrorMessage("Enter Proper Username");
         return;
@@ -87,7 +97,10 @@ export default function Login() {
         );
         return;
       }
-      if (enteredUserName === "senthils" && enterPassword === "A@bced1234") {
+      if (userName === "senthils" && pwd === "A@bced1234") {
+        // setting isLoggedIn as true in session storage
+        // sessionStorage.setItem('isLoggedIn', "true");
+        loginContext.toggleLoginState();
         navigate("/home");
       } else {
         setIsError(true);
