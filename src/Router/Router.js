@@ -26,7 +26,7 @@ function Router() {
         <Route path="/" element={<Navigate to="/home" />}></Route>
       </Routes>
       <Routes>
-        <Route path="/home" element={loginStateObj.isLoggedIn ? <App /> : <div>Please signin to explore</div>}></Route>
+        <Route path="/home" element={loginStateObj.isLoggedIn === false ? <App /> : <div>Please signin to explore</div>}></Route>
       </Routes>
       <Routes>
         <Route
