@@ -3,6 +3,7 @@ const initialState = {
   user: {
     loggedIn: false,
     authToken: "",
+    name: "Senthil"
   },
 };
 
@@ -26,7 +27,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         user: {
           ...state.user,
-          isLoggedIn: true,
+          name: action.payload.name,
+          loggedIn: true,
         },
       };
     case LOGOUT:

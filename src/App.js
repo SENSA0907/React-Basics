@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import { login } from "./store/Actions/actionCreator";
 import "./index.css";
 
-const App = () => {
+const App = (props) => {
+  // userNmae and signedIn are data received from redux, which is mapped via mapStateToProps method
+  // triggerLogin is a prop, which is a function, attached to mapDispatchToProps
+  const { userName, signedIn, triggerLogin } = props;
   const age = 23;
   // there are 3 stages of promise --> pending, resolve and reject
   // when it is success scenario, resolve
@@ -56,61 +61,13 @@ const App = () => {
   // chaining the promises or chaining multiple service calls
   // asynchronous code, but little tough to manage and find the flow
   // even handling error scenarios are little tough
-  const getProductDetails = () => {
-    setIsLoading(true);
-    axios
-      .get("https://dummyjson.com/users/1")
-      .then((userData) => {
-        const userId = 1;
-        // trigger cart service with age as the user id
-        axios
-          .get(`https://dummyjson.com/carts/user/${userId}`)
-          .then((cartData) => {
-            // logic to get product from cart data
-            const productId = 1;
-            axios
-              .get(`'https://dummyjson.com/products`)
-              .then((productData) => {
-                console.log(productData);
-                setIsLoading(false);
-              })
-              .catch((e) => {
-                console.error(e);
-                setIsLoading(false);
-              });
-          })
-          .catch((e) => {
-            console.error(e);
-            setIsLoading(false);
-          });
-      })
-      .catch((e) => {
-        console.error(e);
-        setIsLoading(false);
-      });
-  };
 
-  const getProductDetailsAsync = async () => {
-    // since i wrote function as async and awaiting the axios.get call
-    // I don't want to chain the then or catch method
-    // till this service call resolves or rejects, getProductDetailsAsync method's callback will wait
-    try {
-      setIsLoading(true);
-      const userData = await axios.get("https://dummyjson.com/users/1");
-      const cartData = await axios.get("https://dummyjson.com/carts/user/1");
-      const prodctData = await axios.get("https://dummyjson.com/products");
-      console.log(prodctData);
-      setIsLoading(false);
-    } catch (e) {
-      console.log(e);
-      setIsLoading(false);
-    }
-  };
 
-  useEffect(() => {
-    getProductDetails();
-    getProductDetailsAsync();
-  }, []);
+  const handleClickEvent = () => {
+    triggerLogin({
+      name: "Nathan"
+    })
+  }
 
   useEffect(() => {
     // triggers this useEffect
@@ -120,7 +77,40 @@ const App = () => {
     return <div>Loading ....</div>;
   }
 
-  return <div>App Component</div>;
+  return <div>
+    {`Welcome ${signedIn ? userName : 'Guest'}`}
+    <button onClick={handleClickEvent}>Login</button>
+  </div>;
 };
 
-export default App;
+// I will pass this function as first argument to the connect method
+// this methos is used to get data from redux store and pass it as a props to the connected component
+const mapStateToProps = (state) => {
+  // i can to do redux state mapping to current component props
+  // App.js will recieve 2 props
+  // first prop is userName which is mapped to redux state of user.name
+  // second prop, signedIn mapped to redux state of user.loggedIn
+  // Also this method gets triggered , whenever a update happends in redux store
+  return {
+    userName: state.user.name,
+    signedIn: state.user.loggedIn
+  }
+}
+
+// this method helps in dispatching some action to the redux store
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // from triggerLogin method in component props, i will get payload and
+    // i can pass that payload to the login method
+    // so that, dispatch also gets payload
+    triggerLogin: (payload) => {
+      // calling the login method will give me plain object with type and payload
+      // Here , I'm just passing that object to the dispatch method
+      // so my reducer will receive type ad payload data
+      dispatch(login(payload))
+    }
+  }
+}
+// if u just dispatch, make first argument null
+// if u want redux store data, but don;t want to trigger dispatch, pass second argument as null
+export default connect(mapStateToProps, mapDispatchToProps)(App);
